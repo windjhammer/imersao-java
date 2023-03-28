@@ -13,9 +13,9 @@ Após acessar os dados dos filmes usei o [arquivo disponibilizado](/alura-sticke
 
 Como desafio extra foi proposto:
 
-- `Usar Arquivos separados para as chaves da api.` ❌
+- `Usar Arquivos separados para as chaves da api.` ✅
 - `Output colorido no terminal` ✅
+![Print do resuldado](/dia1/Captura%20de%20tela%202023-03-28%20115134.png)
 - `Emoji recomendando ou não o filme baseado na nota` ❌
 
 ## Dia 2
-
