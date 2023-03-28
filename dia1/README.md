@@ -16,7 +16,9 @@ Como desafio extra foi proposto:
 - `Usar Arquivos separados para as chaves da api.` ✅
 - `Output colorido no terminal` ✅
 
-![Print do resuldado](/dia1/Captura%20de%20tela%202023-03-28%20115134.png)
+<p align= "center">
+<img src="dia1/screenshot01.png" width="100" height="200">
+</p>
 
 - `Emoji recomendando ou não o filme baseado na nota` ❌
 
