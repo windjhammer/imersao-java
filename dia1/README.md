@@ -17,9 +17,10 @@ Como desafio extra foi proposto:
 - `Output colorido no terminal` ✅
 
 <p align= "center">
-<img src="dia1/screenshot01.png" width="100" height="200">
+<img src="screenshot01.png" width="100" height="200">
 </p>
 
-- `Emoji recomendando ou não o filme baseado na nota` ❌
+- `Emoji recomendando ou não o filme baseado na nota` ✅
+
 
 ## Dia 2
