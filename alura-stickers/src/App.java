@@ -24,11 +24,11 @@ public class App {
 
     //manipular os dados
 
-    for (Map<String,String> filme : listaDeFilmes) {
-      System.out.println(filme.get("title"));
-      System.out.println(filme.get("image"));
-      System.out.println(filme.get("imDbRating"));
-      System.out.println(" ");
+    for (Map<String, String> filme : listaDeFilmes) {
+      System.out.println("Título: " + "\u001B[35m" + filme.get("title") + "\u001B[37m");
+      System.out.println("Ano de Lançamento: " + "\u001B[36m" + filme.get("year") + "\u001B[37m");
+      System.out.println("Nota:  " + "\u001B[34m" + filme.get("imDbRating") + "\033[32;1m" );
+      System.out.println();
 
       }
     }
