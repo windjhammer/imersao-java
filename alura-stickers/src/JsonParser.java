@@ -1,5 +1,3 @@
-package br.com.alura.omnistream.service.json;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
