@@ -32,3 +32,6 @@ Uma pequena condicional foi implementada para recomendar ou não (usando um emoj
 
 Ciração de stickers de whatsapp baseados nos posters dos filmes.
 
+  Foi criada uma classe para gerar figurinhas a partir da imagem do poster do filme contida na API. 
+  Com a biblioteca padrão para inserir textos abaixo da imagem do poster baseado na nota do filme/série.
+
