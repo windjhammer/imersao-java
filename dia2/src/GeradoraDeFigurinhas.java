@@ -1,53 +1,39 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 public class GeradoraDeFigurinhas {
-    public void criar(InputStream input, String nome, int nota) throws Exception {
-        BufferedImage originalImage = ImageIO.read(input);
+    void create(String urlImagem, String textoImagem, String nomeSaida){
+        try {
+            InputStream inputStream = new URL(urlImagem).openStream();
+            BufferedImage originalImage = ImageIO.read(inputStream);
 
-        int width = originalImage.getWidth();
-        int height = originalImage.getHeight();
+            int largura = originalImage.getWidth();
+            int altura = originalImage.getHeight();
+            double percent = 0.08;
+            int novaAlutra = (int) Math.floor(altura * percent + altura);
+            var novaImagem = new BufferedImage(largura, novaAlutra, BufferedImage.TRANSLUCENT);
 
-        int newHeight = height+200;
-        BufferedImage newImage = new BufferedImage(width, newHeight, BufferedImage.TRANSLUCENT);
+            Graphics2D graphics = (Graphics2D) novaImagem.getGraphics();
+            graphics.drawImage(originalImage, null, 0, 0);
 
-        Graphics2D graphic = (Graphics2D) newImage.getGraphics();
-        graphic.drawImage(originalImage, 0, 0, null);
+            var fonte = new Font("Consolas", Font.BOLD, largura / 20);
+            graphics.setFont(fonte);
+            graphics.setColor(Color.YELLOW);
 
-        Font font = new Font("Consolas", Font.BOLD, 64);
-        graphic.setFont(font);
-        graphic.setColor(Color.BLUE);
-        String review;
+            int posicaoTexto = novaAlutra - (int) Math.floor(altura *(percent /2));
+            graphics.drawString(textoImagem, 0, posicaoTexto);
 
-        if (nota == 10) {
-            review = "Impecável.";
-        } else if (nota < 10 && nota > 7) {
-            review = "Bom.";
-        } else if (nota <= 7 && nota > 5) {
-            review = "Dá pra ver.";
-        } else if (nota <= 5 && nota > 2) {
-            review = "Ruim.";
-        } else {
-            review = "Não veja.";
+            ImageIO.write(novaImagem, "png", new File("imagens/", nomeSaida + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        
-        FontMetrics fontMetrics = graphic.getFontMetrics();
-        Rectangle2D rectangle = fontMetrics.getStringBounds(review, graphic);
-        int textWidth = (int) rectangle.getWidth();
-        int newWidth = (width - textWidth) / 2;
+    }
 
-        graphic.drawString(review, newWidth, newHeight-100);
-
-        File dir = new File("pronto");
-        if (!(dir.exists())) {
-            new File("pronto").mkdir();
-        }
-        
-        ImageIO.write(newImage, "png", new File("pronto/"+nome));
-
+    public void cria(InputStream inputStream, String nomeArquivo) {
     }
 }
