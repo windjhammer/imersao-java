@@ -1,19 +1,53 @@
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class GeradoraDeFigurinhas {
-    void cria() throws Exception {
-        //leitura da imagem
-        InputStream inputStream = new FileInputStream(new File("https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs_3.jpg"));
-        //criar nova imagem redimensionando com espaço transparente para o texto 
+    public void criar(InputStream input, String nome, int nota) throws Exception {
+        BufferedImage originalImage = ImageIO.read(input);
 
-        //copiar a imagem original para a nova
+        int width = originalImage.getWidth();
+        int height = originalImage.getHeight();
 
-        //escrever frase na nova imagem
+        int newHeight = height+200;
+        BufferedImage newImage = new BufferedImage(width, newHeight, BufferedImage.TRANSLUCENT);
 
-        //salvar a imagem em um arquivo
+        Graphics2D graphic = (Graphics2D) newImage.getGraphics();
+        graphic.drawImage(originalImage, 0, 0, null);
 
+        Font font = new Font("Consolas", Font.BOLD, 64);
+        graphic.setFont(font);
+        graphic.setColor(Color.BLUE);
+        String review;
+
+        if (nota == 10) {
+            review = "Impecável.";
+        } else if (nota < 10 && nota > 7) {
+            review = "Bom.";
+        } else if (nota <= 7 && nota > 5) {
+            review = "Dá pra ver.";
+        } else if (nota <= 5 && nota > 2) {
+            review = "Ruim.";
+        } else {
+            review = "Não veja.";
+        }
+        
+        FontMetrics fontMetrics = graphic.getFontMetrics();
+        Rectangle2D rectangle = fontMetrics.getStringBounds(review, graphic);
+        int textWidth = (int) rectangle.getWidth();
+        int newWidth = (width - textWidth) / 2;
+
+        graphic.drawString(review, newWidth, newHeight-100);
+
+        File dir = new File("pronto");
+        if (!(dir.exists())) {
+            new File("pronto").mkdir();
+        }
+        
+        ImageIO.write(newImage, "png", new File("pronto/"+nome));
 
     }
 }
