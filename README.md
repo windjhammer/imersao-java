@@ -20,18 +20,21 @@ Assim, a solução para completar esse desafio foi colocar os links dentro de um
 - `Output colorido no terminal` ✅ <br>
 Usando códigos ANSI foi possível personalizar as cores do texto tornando-o mais legível e elegante.
 
-<p align= "center">
-<img src="dia1/screenshot01.png" width="400" height="500">
-</p>
+<p align= "center"><img src="dia1/screenshot01.png" width="400" height="500"></p>
 
 - `Emoji recomendando ou não o filme baseado na nota` ✅ <br>
 Uma pequena condicional foi implementada para recomendar ou não (usando um emoji 👍) baseado na nota do filme.
-
 
 ## Dia 2
 
 Ciração de stickers de whatsapp baseados nos posters dos filmes.
 
-  Foi criada uma classe para gerar figurinhas a partir da imagem do poster do filme contida na API. 
+  Foi criada uma classe para gerar figurinhas a partir da imagem do poster do filme contida na API.
   Com a biblioteca padrão para inserir textos abaixo da imagem do poster baseado na nota do filme/série.
 
+## Dia 3
+
+Refatoração do código. Dividir em outros módulos.
+
+- Tornar o programa mais genérico para usar APIS diferentes.
+- 
