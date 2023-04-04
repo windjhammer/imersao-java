@@ -1,54 +1,35 @@
 import java.io.InputStream;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.http.HttpResponse.BodyHandlers;
 import java.util.List;
-import java.util.Map;
-
 
 public class App {
+
     public static void main(String[] args) throws Exception {
-   
-    //consumir dados da api
 
-    String url = ("https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs.json");
-    URI endereco = URI.create(url);
-    var client = HttpClient.newHttpClient();
-    var request = HttpRequest.newBuilder(endereco).GET().build();
-    HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
-    String body = response.body();
+        API api = API.IMDB_TOP_SERIES;
 
-    //parsear os dados
+        String url = api.getUrl();
+        ExtratorDeConteudo extrator = api.getExtrator();
 
-    var parser = new JsonParser();
-    List<Map<String, String>> listaDeFilmes = parser.parse(body);
+        var http = new ClienteHttp();
+        String json = http.buscaDados(url);
 
-    //manipular os dados
+        // exibir e manipular os dados 
+        List<Conteudo> conteudos = extrator.extraiConteudos(json);
 
-    for (Map<String, String> filme : listaDeFilmes) {
+        var geradora = new GeradoraDeFigurinhas();
 
-      String urlString = filme.get("image");
-      InputStream inputStream = new URL(urlString).openStream();
-      var geradora = new GeradoraDeFigurinhas();
-      String nomeArquivo = titulo + ".png";
-      geradora.cria(inputStream, nomeArquivo);
+        for (int i = 0; i < 3; i++) {
 
-      System.out.println("Título: " + "\u001B[35m" + filme.get("title") + "\u001B[37m");
-      System.out.println("Ano de Lançamento: " + "\u001B[36m" + filme.get("year") + "\u001B[37m");
-      System.out.println("Nota:  " + "\u001B[34m" + filme.get("imDbRating") + "\033[32;1m" );
-      float fNota = Float.parseFloat(filme.get("imDbRating"));
-      int nota = (int) Math.floor(fNota);
-      if (nota>=6){
-        System.out.println("Recomendo👍");
-      }
-      else{
-        System.out.println("Não Recomendo 👎");
-      }
+            Conteudo conteudo = conteudos.get(i);
 
-      }
+            InputStream inputStream = new URL(conteudo.urlImagem()).openStream();
+            String nomeArquivo = "saida/" + conteudo.titulo() + ".png";
+
+            geradora.cria(inputStream, nomeArquivo);
+
+            System.out.println(conteudo.titulo());
+            System.out.println();
+        }
     }
-  }
-
+}
